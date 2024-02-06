@@ -7,6 +7,7 @@ Finally, turn on the PPU to display video.
 */
 
 #include "neslib.h"
+#include "apu.h"
 
 // link the pattern table into CHR ROM
 //#link "chr_generic.s"
@@ -20,6 +21,11 @@ void main(void) {
   pal_col(2,0x20);	// grey
   pal_col(3,0x30);	// white
 
+  APU_ENABLE(ENABLE_PULSE0);
+  APU_PULSE_SUSTAIN(1,2,2,2);
+
+  //music_play(1); // Menu Music
+  
   // write text to name table
   vram_adr(NTADR_A(10,10));	// set address
   vram_write("",10);	// write bytes to video RAM
